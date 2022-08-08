@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -148,7 +148,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 context,
                 PageTransition(
                     type: PageTransitionType.rightToLeft,
-                    child: const NameScreen()));
+                    child: NameScreen(isKeyboardVisible: KeyboardVisibilityController().isVisible)));
           },
           style: ElevatedButton.styleFrom(
               primary: Theme.of(context).disabledColor),

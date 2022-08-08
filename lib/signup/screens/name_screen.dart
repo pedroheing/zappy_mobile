@@ -8,7 +8,10 @@ import 'package:zappy/signup/components/header.dart';
 import 'package:zappy/signup/screens/email_screen.dart';
 
 class NameScreen extends StatefulWidget {
-  const NameScreen({Key? key}) : super(key: key);
+  final bool isKeyboardVisible;
+
+  const NameScreen({Key? key, required this.isKeyboardVisible})
+      : super(key: key);
 
   @override
   State<NameScreen> createState() => _NameScreenState();
@@ -21,11 +24,17 @@ class _NameScreenState extends State<NameScreen> {
   });
   final focusNode = FocusNode();
 
-  _NameScreenState() {
-    // prevents visual bug on last screen if keyboard opens too fast
-    Future.delayed(const Duration(milliseconds: 100), () {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isKeyboardVisible) {
       focusNode.requestFocus();
-    });
+    } else {
+      // prevents visual bug on last screen if keyboard opens too fast
+      Future.delayed(const Duration(milliseconds: 100), () {
+        focusNode.requestFocus();
+      });
+    }
   }
 
   @override
@@ -42,8 +51,7 @@ class _NameScreenState extends State<NameScreen> {
                     title: 'Qual é o seu nome?',
                     closeKeyboardOnPop:
                         CloseKeyboardOnPop(isKeyboardVisible: (ctx) {
-                      return KeyboardVisibilityProvider.isKeyboardVisible(
-                          ctx);
+                      return KeyboardVisibilityProvider.isKeyboardVisible(ctx);
                     }),
                   ),
                   const SizedBox(height: 20),

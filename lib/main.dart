@@ -9,6 +9,7 @@ import 'package:zappy/theme/theme.dart';
 import 'package:zappy/theme/theme_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     const ProviderScope(
       child: MyApp(),

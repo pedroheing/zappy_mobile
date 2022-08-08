@@ -5,5 +5,12 @@
     "introductionAuthor": "Oi 👋 meu nome é Pedro e eu sou o desenvolvedor responsável pelo Zappy.",
     "introductionZappy": "Zappy é um aplicativo de mensagens que criei enquanto pesquisava e praticava o uso de novas ferramentas e técnicas de desenvolvimento.",
     "moreAboutTheProject": "Caso tenha interesse nos detalhes de sua implementação é só acessar o projeto no",
-    "moreAboutTheAuthor": "Caso queria entrar em contato comigo, sinta-se livre para me chamar no"
+    "moreAboutTheAuthor": "Caso queria entrar em contato comigo, sinta-se livre para me chamar no",
+    "validationRequired": "Este campo é obrigatório",
+    "validationEmail": "E-mail inválido",
+
+    "password": "Senha",
+    "createNewAccount": "Criar nova conta",
+    "login": "Entrar",
+    "forgotPassword": "Esqueci a senha"
 }

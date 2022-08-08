@@ -98,7 +98,8 @@ class InitialScreen extends StatelessWidget {
                 context: context,
                 text: AppLocalizations.of(context).moreAboutTheAuthor,
                 socialMediaName: 'LinkedIn',
-                socialMediaUrl: 'https://www.linkedin.com/in/pedro-henrique-heing-geronimo-59804b148'),
+                socialMediaUrl:
+                    'https://www.linkedin.com/in/pedro-henrique-heing-geronimo-59804b148'),
           ],
         ),
         image: const Center(
@@ -106,6 +107,21 @@ class InitialScreen extends StatelessWidget {
               radius: 70,
               backgroundImage: AssetImage('assets/my-profile-picture.png')),
         ));
+  }
+
+  PageDecoration buildPageDecoration({int imageFlex = 0}) {
+    return PageDecoration(
+        contentMargin: const EdgeInsets.all(0),
+        imageFlex: imageFlex,
+        bodyPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20));
+  }
+
+  Text buildTextProfile(BuildContext context, String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: fontSizeProfilePage),
+    );
   }
 
   Text buildRichSocialMediaTextProfile(
@@ -134,35 +150,24 @@ class InitialScreen extends StatelessWidget {
         textAlign: TextAlign.center);
   }
 
-  Text buildTextProfile(BuildContext context, String text) {
-    return Text(
-      text,
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: fontSizeProfilePage),
-    );
-  }
-
-  PageDecoration buildPageDecoration({int imageFlex = 0}) {
-    return PageDecoration(
-        contentMargin: const EdgeInsets.all(0),
-        imageFlex: imageFlex,
-        bodyPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20));
-  }
-
-  Row buildStartButton(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    shape: const StadiumBorder()),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => LogInScreen()));
-                },
-                child: Text(AppLocalizations.of(context)
-                    .introductionStartConversation)))
-      ],
+  Padding buildStartButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          Expanded(
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: const StadiumBorder()),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (ctx) => const LogInScreen()));
+                  },
+                  child: Text(AppLocalizations.of(context)
+                      .introductionStartConversation)))
+        ],
+      ),
     );
   }
 }

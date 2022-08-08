@@ -5,5 +5,12 @@
     "introductionAuthor": "Hi 👋 my name is Pedro and I am the creator of Zappy.",
     "introductionZappy": "Zappy is a messaging app I created while researching and practicing using new development tools and techniques.",
     "moreAboutTheProject": "If you are interested in the details of its implementation, just access the project on",
-    "moreAboutTheAuthor": "If you want to get in touch with me, feel free to contact me at"
+    "moreAboutTheAuthor": "If you want to get in touch with me, feel free to contact me at",
+    "validationRequired": "Field must not be empty",
+    "validationEmail": "Must enter a valid email",
+
+    "password": "Password",
+    "createNewAccount": "Create new account",
+    "login": "Log in",
+    "forgotPassword": "Forgot my password"
 }

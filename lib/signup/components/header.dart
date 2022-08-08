@@ -19,7 +19,7 @@ class SignupHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: [
@@ -43,7 +43,7 @@ class SignupHeader extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 8),
               child: Column(
                 children: [
                   SizedBox(

@@ -13,7 +13,7 @@ class NextButton {
 class SignupTemplateScreen extends StatelessWidget {
   final SignupHeader signupHeader;
   final FormGroup form;
-  final Column formBody;
+  final Widget formBody;
   final NextButton nextButton;
 
   const SignupTemplateScreen(
@@ -59,9 +59,7 @@ class SignupTemplateScreen extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: ElevatedButton(
-                onPressed: formGroup.valid
-                    ? nextButton.onPressed
-                    : null,
+                onPressed: formGroup.valid ? nextButton.onPressed : null,
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     shape: roundedRectangleBorder),

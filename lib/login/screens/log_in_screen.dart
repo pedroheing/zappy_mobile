@@ -3,9 +3,8 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:zappy/components/password_form_field.dart';
 import 'package:zappy/login/components/round_button.dart';
-import 'package:zappy/login/providers/show_password_icon_provider.dart';
-import 'package:zappy/login/providers/show_password_provider.dart';
 import 'package:zappy/signup/screens/name_screen.dart';
 import 'package:zappy/theme/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -92,41 +91,10 @@ class _LogInScreenState extends State<LogInScreen> {
     );
   }
 
-  Consumer _buildPasswordField() {
-    return Consumer(builder: ((context, ref, child) {
-      final showPassword = ref.watch(showPasswordProvider);
-      final showPasswordIcon = ref.watch(showPasswordIconProvider);
-      return ReactiveTextField(
-        formControlName: 'password',
-        obscureText: !showPassword,
-        onChanged: (control) {
-          final showIcon = control.value != '';
-          ref.read(showPasswordIconProvider.notifier).show(showIcon);
-          if (!showIcon) {
-            ref.read(showPasswordProvider.notifier).show(false);
-          }
-        },
-        validationMessages: {
-          ValidationMessage.required: (_) =>
-              AppLocalizations.of(context).validationRequired,
-        },
-        decoration: InputDecoration(
-            label: Text(AppLocalizations.of(context).password),
-            suffixIcon: showPasswordIcon
-                ? IconButton(
-                    icon: Icon(
-                      Icons.visibility,
-                      color: showPassword
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onSecondary,
-                    ),
-                    onPressed: () {
-                      ref.read(showPasswordProvider.notifier).toggle();
-                    },
-                  )
-                : null),
-      );
-    }));
+  PasswordFormField _buildPasswordField() {
+    return PasswordFormField(
+      formControlName: 'password'
+    );
   }
 
   ReactiveFormConsumer _buildSigninButton() {
@@ -148,7 +116,9 @@ class _LogInScreenState extends State<LogInScreen> {
                 context,
                 PageTransition(
                     type: PageTransitionType.rightToLeft,
-                    child: NameScreen(isKeyboardVisible: KeyboardVisibilityController().isVisible)));
+                    child: NameScreen(
+                        isKeyboardVisible:
+                            KeyboardVisibilityController().isVisible)));
           },
           style: ElevatedButton.styleFrom(
               primary: Theme.of(context).disabledColor),
@@ -160,8 +130,9 @@ class _LogInScreenState extends State<LogInScreen> {
   Center _buildForgotPasswordButton() {
     return Center(
       child: TextButton(
-          onPressed: () {},
-          child: Text(AppLocalizations.of(context).forgotPassword)),
+        onPressed: () {},
+        child: Text(AppLocalizations.of(context).forgotPassword),
+      ),
     );
   }
 

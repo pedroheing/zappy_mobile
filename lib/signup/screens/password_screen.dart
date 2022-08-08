@@ -25,7 +25,7 @@ class HasLowercaseTextNotifier extends StateNotifier<bool> {
   HasLowercaseTextNotifier() : super(false);
 
   onChanged(String value) {
-    state = RegExp(r'[A-Z]').hasMatch(value);
+    state = RegExp(r'[a-z]').hasMatch(value);
   }
 }
 
@@ -33,7 +33,7 @@ class HasUppercaseTextNotifier extends StateNotifier<bool> {
   HasUppercaseTextNotifier() : super(false);
 
   onChanged(String value) {
-    state = RegExp(r'[a-z]').hasMatch(value);
+    state = RegExp(r'[A-Z]').hasMatch(value);
   }
 }
 

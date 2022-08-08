@@ -47,21 +47,21 @@ class SignupHeader extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: Text(
                         title,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold),
+                            fontSize: 27, fontWeight: FontWeight.bold),
                       )),
-                  const SizedBox(
-                    height: 20,
-                  ),
                   if (subtitle != null)
-                    Text(
-                      subtitle!,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        subtitle!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     )
                 ],
               ),

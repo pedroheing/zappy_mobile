@@ -45,36 +45,35 @@ class _ProfilePictureButtonState extends State<ProfilePictureButton> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => ProfilePictureModal(
-        onPressedCamera: () => _onPressedCamera(context),
-        onPressedGallery: () => _onPressedGallery(context),
+        onPressedCamera: _onPressedCamera,
+        onPressedGallery: _onPressedGallery,
         onPressedRemove: _onPressedRemove,
       ),
     );
   }
 
-  _onPressedCamera(BuildContext context) {
-    _getProfilePicture(context, ImageSource.camera);
+  _onPressedCamera() {
+    _getProfilePicture(ImageSource.camera);
   }
 
-  _onPressedGallery(BuildContext context) {
-    _getProfilePicture(context, ImageSource.gallery);
+  _onPressedGallery() {
+    _getProfilePicture(ImageSource.gallery);
   }
 
-  void _getProfilePicture(BuildContext context, ImageSource imageSource) {
-    picker.pickImage(source: imageSource).then((value) async {
-      if (value == null) return;
-      CroppedFile? croppedFile = await _cropProfilePicture(value.path, context);
+  void _getProfilePicture(ImageSource imageSource) async {
+    Navigator.of(context).pop();
+    final image = await picker.pickImage(source: imageSource);
+    if (image != null) {
+      CroppedFile? croppedFile = await _cropProfilePicture(image.path);
       if (croppedFile != null) {
         setState(() {
-          Navigator.of(context).pop();
           profilePicturePath = croppedFile.path;
         });
       }
-    });
+    }
   }
 
-  Future<CroppedFile?> _cropProfilePicture(
-      String sourcePath, BuildContext context) {
+  Future<CroppedFile?> _cropProfilePicture(String sourcePath) {
     return cropper.cropImage(
       sourcePath: sourcePath,
       cropStyle: CropStyle.circle,

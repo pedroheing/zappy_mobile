@@ -34,6 +34,8 @@ class PasswordFormField extends StatelessWidget {
   final bool autofocus;
   final Map<String, ValidationMessageFunction>? validationMessages;
   final void Function(String value)? onChanged;
+  final ShowErrorsFunction? showErros;
+
   final passwordProvider =
       StateNotifierProvider<PasswordNotifier, Password>((ref) {
     return PasswordNotifier();
@@ -44,6 +46,7 @@ class PasswordFormField extends StatelessWidget {
       required this.formControlName,
       this.autofocus = false,
       this.validationMessages,
+      this.showErros,
       this.onChanged})
       : super(key: key);
 
@@ -55,6 +58,7 @@ class PasswordFormField extends StatelessWidget {
         formControlName: formControlName,
         obscureText: !password.isVisible,
         autofocus: autofocus,
+        showErrors: showErros,
         onChanged: (control) {
           if (onChanged != null) {
             onChanged!(control.value as String);

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:zappy/components/password_form_field.dart';
 import 'package:zappy/signup/components/header.dart';
+import 'package:zappy/signup/screens/profile_picture_screen.dart';
 import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
+import 'package:zappy/theme/theme_provider.dart';
 
 class MinCharactersNotifier extends StateNotifier<bool> {
   MinCharactersNotifier() : super(false);
@@ -84,7 +87,13 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     return SignupTemplateScreen(
       form: form,
       formBody: _buildFormBody(),
-      nextButton: NextButton(onPressed: () {}, text: 'Criar conta'),
+      nextButton: NextButton(onPressed: () {
+        Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft,
+                    child: const ProfilePictureScreen()));
+      }, text: 'Avançar'),
       signupHeader: _buildSignupHeader(),
     );
   }
@@ -99,6 +108,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
                 child: PasswordFormField(
               formControlName: 'password',
               autofocus: true,
+              showErros: (control) => false,
               onChanged: (value) {
                 ref.read(hasMinCharactersProvider.notifier).onChanged(value);
                 ref.read(hasNumbersProvider.notifier).onChanged(value);
@@ -111,38 +121,19 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
         const SizedBox(
           height: 20,
         ),
-        Row(
-          children: const [
-            Expanded(
-                child: Text("A senha deve ter ao menos",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16)))
-          ],
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        Row(
-          children: [
-            _buildRequirement(hasMinCharactersProvider, '6 caracteres'),
-            const SizedBox(
-              width: 20,
-            ),
-            _buildRequirement(hasNumbersProvider, 'números')
-          ],
-        ),
+        _buildRequirement(hasMinCharactersProvider, '6 caracteres'),
         const SizedBox(
           height: 20,
         ),
-        Row(
-          children: [
-            _buildRequirement(hasLowercaseTextProvider, 'letras minisculas'),
-            const SizedBox(
-              width: 20,
-            ),
-            _buildRequirement(hasUppercaseTextProvider, 'letras maisculas')
-          ],
+        _buildRequirement(hasNumbersProvider, 'números'),
+        const SizedBox(
+          height: 20,
         ),
+        _buildRequirement(hasLowercaseTextProvider, 'letras minisculas'),
+        const SizedBox(
+          height: 20,
+        ),
+        _buildRequirement(hasUppercaseTextProvider, 'letras maisculas')
       ],
     );
   }
@@ -150,21 +141,19 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   Consumer _buildRequirement(
       ProviderListenable<dynamic> provider, String requirement) {
     return Consumer(builder: ((context, ref, child) {
-      final hasMinCharacters = ref.watch(provider);
-      return Flexible(
-          child: Row(
+      final hasRequirement = ref.watch(provider);
+      ref.watch(themeProvider);
+      return Row(
         children: [
-          Material(
-            child: Ink(
-              decoration: const ShapeDecoration(
-                color: Colors.white,
-                shape: CircleBorder(),
-              ),
-              child: Icon(Icons.check_circle,
-                  size: 18,
-                  color: hasMinCharacters
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).disabledColor),
+          CircleAvatar(
+            radius: 10,
+            backgroundColor: hasRequirement
+                ? ref.read(themeProvider.notifier).isDarkMode ? Colors.green[800] : Colors.green[600]
+                : Theme.of(context).disabledColor,
+            child: const Icon(
+              Icons.check,
+              size: 15,
+              color: Colors.white,
             ),
           ),
           const SizedBox(
@@ -174,7 +163,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
             child: Text(requirement),
           )
         ],
-      ));
+      );
     }));
   }
 

@@ -49,6 +49,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     'password': FormControl<String>(validators: [
       Validators.required,
       Validators.minLength(6),
+      Validators.pattern(RegExp(r'\d+')),
       // Uppercase
       Validators.pattern(RegExp(r'[A-Z]+')),
       // Lowercase
@@ -83,7 +84,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     return SignupTemplateScreen(
       form: form,
       formBody: _buildFormBody(),
-      nextButton: NextButton(onPressed: () {}, text: 'Avançar'),
+      nextButton: NextButton(onPressed: () {}, text: 'Criar conta'),
       signupHeader: _buildSignupHeader(),
     );
   }
@@ -92,6 +93,24 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Row(
+          children: [
+            Expanded(
+                child: PasswordFormField(
+              formControlName: 'password',
+              autofocus: true,
+              onChanged: (value) {
+                ref.read(hasMinCharactersProvider.notifier).onChanged(value);
+                ref.read(hasNumbersProvider.notifier).onChanged(value);
+                ref.read(hasLowercaseTextProvider.notifier).onChanged(value);
+                ref.read(hasUppercaseTextProvider.notifier).onChanged(value);
+              },
+            ))
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         Row(
           children: const [
             Expanded(
@@ -124,24 +143,6 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
             _buildRequirement(hasUppercaseTextProvider, 'letras maisculas')
           ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Expanded(
-                child: PasswordFormField(
-              formControlName: 'password',
-              autofocus: true,
-              onChanged: (value) {
-                ref.read(hasMinCharactersProvider.notifier).onChanged(value);
-                ref.read(hasNumbersProvider.notifier).onChanged(value);
-                ref.read(hasLowercaseTextProvider.notifier).onChanged(value);
-                ref.read(hasUppercaseTextProvider.notifier).onChanged(value);
-              },
-            ))
-          ],
-        )
       ],
     );
   }

@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:zappy/signup/components/header.dart';
-import 'package:zappy/signup/screens/name_screen.dart';
 import 'package:zappy/components/signup_tempalte_screen.dart';
+import 'package:zappy/signup/components/header.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class EmailScreen extends StatefulWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   final bool isKeyboardVisible;
 
-  const EmailScreen({Key? key, required this.isKeyboardVisible})
+  const ForgotPasswordScreen({Key? key, required this.isKeyboardVisible})
       : super(key: key);
 
   @override
-  State<EmailScreen> createState() => _EmailScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _EmailScreenState extends State<EmailScreen> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final form = FormGroup({
     'email': FormControl<String>(
         validators: [Validators.required, Validators.email]),
@@ -40,20 +38,20 @@ class _EmailScreenState extends State<EmailScreen> {
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityProvider(
-      child: FormTemplateScreen(
-        form: form,
-        formBody: _buildFormBody(),
-        nextButton: NextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.rightToLeft,
-                      child: const NameScreen()));
-            },
-            text: 'Avançar'),
-        signupHeader: _buildSignupHeader(),
-      ),
+        child: FormTemplateScreen(
+      form: form,
+      formBody: _buildFormBody(),
+      nextButton: NextButton(onPressed: () {}, text: 'Recuperar senha'),
+      signupHeader: _buildSignupHeader(),
+    ));
+  }
+
+  SignupHeader _buildSignupHeader() {
+    return SignupHeader(
+      title: 'Qual é o seu e-mail?',
+      closeKeyboardOnPop: CloseKeyboardOnPop(isKeyboardVisible: (ctx) {
+        return KeyboardVisibilityProvider.isKeyboardVisible(ctx);
+      }),
     );
   }
 
@@ -73,15 +71,6 @@ class _EmailScreenState extends State<EmailScreen> {
           decoration: const InputDecoration(label: Text("E-mail")),
         )
       ],
-    );
-  }
-
-  SignupHeader _buildSignupHeader() {
-    return SignupHeader(
-      title: 'Qual é seu e-mail?',
-      closeKeyboardOnPop: CloseKeyboardOnPop(isKeyboardVisible: (ctx) {
-        return KeyboardVisibilityProvider.isKeyboardVisible(ctx);
-      }),
     );
   }
 }

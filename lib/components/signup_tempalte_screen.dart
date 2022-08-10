@@ -10,13 +10,13 @@ class NextButton {
   NextButton({required this.onPressed, required this.text});
 }
 
-class SignupTemplateScreen extends StatelessWidget {
+class FormTemplateScreen extends StatelessWidget {
   final SignupHeader signupHeader;
   final FormGroup form;
   final Widget formBody;
   final NextButton nextButton;
 
-  const SignupTemplateScreen(
+  const FormTemplateScreen(
       {Key? key,
       required this.signupHeader,
       required this.form,

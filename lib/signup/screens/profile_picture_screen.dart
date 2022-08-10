@@ -5,7 +5,7 @@ import 'package:zappy/components/profile_picture/profile_picture.dart';
 import 'package:zappy/components/profile_picture/profile_picture_size.dart';
 import 'package:zappy/signup/components/header.dart';
 import 'package:zappy/signup/screens/password_screen.dart';
-import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
+import 'package:zappy/components/signup_tempalte_screen.dart';
 
 class ProfilePictureScreen extends StatefulWidget {
   const ProfilePictureScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SignupTemplateScreen(
+    return FormTemplateScreen(
       form: form,
       formBody: _buildFormBody(context),
       nextButton: NextButton(

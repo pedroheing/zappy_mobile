@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:zappy/components/password_form_field.dart';
 import 'package:zappy/signup/components/header.dart';
 import 'package:zappy/signup/screens/profile_picture_screen.dart';
-import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
+import 'package:zappy/components/signup_tempalte_screen.dart';
 import 'package:zappy/theme/theme_provider.dart';
 
 class MinCharactersNotifier extends StateNotifier<bool> {
@@ -84,7 +84,7 @@ class _PasswordScreenState extends ConsumerState<PasswordScreen> {
   Widget build(
     BuildContext context,
   ) {
-    return SignupTemplateScreen(
+    return FormTemplateScreen(
       form: form,
       formBody: _buildFormBody(),
       nextButton: NextButton(onPressed: () {

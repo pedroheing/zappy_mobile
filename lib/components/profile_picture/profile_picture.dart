@@ -83,17 +83,30 @@ class _ProfilePictureState extends State<ProfilePicture> {
   }
 
   _onPressedCamera() async {
-    // await Permission.camera.request();
-    _getProfilePicture(ImageSource.camera);
+    _getProfilePicture(
+        imageSource: ImageSource.camera,
+        imageQuality: 70,
+        maxWidth: 600,
+        maxHeight: 600);
   }
 
   _onPressedGallery() {
-    _getProfilePicture(ImageSource.gallery);
+    _getProfilePicture(imageSource: ImageSource.gallery);
   }
 
-  void _getProfilePicture(ImageSource imageSource) async {
+  void _getProfilePicture(
+      {required ImageSource imageSource,
+      int? imageQuality,
+      double? maxWidth,
+      double? maxHeight}) async {
     Navigator.of(context).pop();
-    picker.pickImage(source: imageSource).then((image) async {
+    picker
+        .pickImage(
+            source: imageSource,
+            imageQuality: imageQuality,
+            maxWidth: maxWidth,
+            maxHeight: maxHeight)
+        .then((image) async {
       if (image != null) {
         CroppedFile? croppedFile = await _cropProfilePicture(image.path);
         if (croppedFile != null) {
@@ -109,6 +122,13 @@ class _ProfilePictureState extends State<ProfilePicture> {
     return cropper.cropImage(
       sourcePath: sourcePath,
       cropStyle: CropStyle.circle,
+      aspectRatioPresets: const [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'Foto do perfil',

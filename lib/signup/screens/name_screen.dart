@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zappy/signup/components/header.dart';
 import 'package:zappy/signup/screens/password_screen.dart';
-import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
+import 'package:zappy/components/signup_tempalte_screen.dart';
 
 class NameScreen extends StatefulWidget {
   const NameScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _NameScreenState extends State<NameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SignupTemplateScreen(
+    return FormTemplateScreen(
       form: form,
       formBody: _buildFormBody(context),
       nextButton: NextButton(

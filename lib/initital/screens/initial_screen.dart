@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:zappy/components/theme_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:zappy/login/screens/log_in_screen.dart';
+import 'package:zappy/login/screens/login_screen.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({Key? key}) : super(key: key);

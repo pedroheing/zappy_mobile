@@ -64,7 +64,6 @@ class _EmailScreenState extends State<EmailScreen> {
           formControlName: 'email',
           focusNode: focusNode,
           keyboardType: TextInputType.emailAddress,
-          autofocus: true,
           validationMessages: {
             ValidationMessage.required: (_) =>
                 AppLocalizations.of(context).validationRequired,

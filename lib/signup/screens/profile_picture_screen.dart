@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:zappy/components/profile_picture/profile_picture.dart';
+import 'package:zappy/components/profile_picture/profile_picture_size.dart';
 import 'package:zappy/signup/components/header.dart';
-import 'package:zappy/signup/components/profile_picture_button.dart';
 import 'package:zappy/signup/screens/password_screen.dart';
 import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
 
@@ -46,9 +47,9 @@ class _ProfilePictureScreenState extends State<ProfilePictureScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children:  [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.3,
+          height: MediaQuery.of(context).size.height * 0.4,
         ),
-        const ProfilePictureButton()
+        ProfilePicture(profilePictureSizeConfig: ProfilePictureSize.large)
         ],
     );
   }

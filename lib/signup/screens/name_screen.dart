@@ -4,7 +4,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:zappy/signup/components/header.dart';
-import 'package:zappy/signup/components/profile_picture_button.dart';
 import 'package:zappy/signup/screens/password_screen.dart';
 import 'package:zappy/signup/screens/signup_tempalte_screen.dart';
 

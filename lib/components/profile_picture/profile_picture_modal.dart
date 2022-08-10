@@ -24,7 +24,7 @@ class ProfilePictureModal extends StatelessWidget {
               children: [
                 const Text(
                   "Foto do perfil",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
                 IconButton(onPressed: onPressedRemove, icon: const Icon(Icons.delete))
               ],
@@ -57,7 +57,7 @@ class ProfilePictureModal extends StatelessWidget {
       required VoidCallback onPressed}) {
     return Column(
       children: [
-        OutlinedButton(
+        ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(20),

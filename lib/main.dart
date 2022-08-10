@@ -9,11 +9,16 @@ import 'package:zappy/theme/theme_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  // delays the app initialization to prevent flutter bug 
+  //where the first pages crashes when the apps opens
+  // https://github.com/flutter/flutter/issues/101007
+  Future.delayed(const Duration(milliseconds: 200), () {
+    runApp(
+      const ProviderScope(
+        child: MyApp(),
+      ),
+    );
+  });
 }
 
 class MyApp extends ConsumerWidget {

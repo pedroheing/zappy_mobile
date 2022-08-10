@@ -5,7 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:zappy/components/password_form_field.dart';
 import 'package:zappy/login/components/round_button.dart';
-import 'package:zappy/recover_password/screens/forgot_password.dart';
+import 'package:zappy/forgot_password/screens/forgot_password.dart';
 import 'package:zappy/signup/screens/email_screen.dart';
 import 'package:zappy/theme/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
